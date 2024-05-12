@@ -1,0 +1,9 @@
+# To prevent leaking configuration for anything other than the intended
+# applications, we will ignore all top-level entries by default:
+/*
+
+# Explicitly allow the files and directories that we wish to track in
+# version control:
+!.gitignore
+!README.md
+!/wezterm/
