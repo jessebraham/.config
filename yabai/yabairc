@@ -1,0 +1,69 @@
+#!/usr/bin/env sh
+
+# For this to work you must configure sudo such that it will be able to run
+# the command without password.
+#
+# See this wiki page for information:
+# https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# Global settings:
+yabai -m config                                 \
+    external_bar                 all:40:0       \
+    menubar_opacity              0.0            \
+    mouse_follows_focus          off            \
+    focus_follows_mouse          autoraise      \
+    display_arrangement_order    default        \
+    window_origin_display        default        \
+    window_placement             second_child   \
+    window_zoom_persist          on             \
+    window_shadow                off            \
+    window_opacity               off            \
+    window_opacity_duration      0.0            \
+    active_window_opacity        1.0            \
+    normal_window_opacity        1.0            \
+    window_animation_duration    0.0            \
+    window_animation_easing      ease_out_circ  \
+    insert_feedback_color        0xFFD75F5F     \
+    split_ratio                  0.50           \
+    split_type                   auto           \
+    mouse_modifier               fn             \
+    mouse_action1                move           \
+    mouse_action2                resize         \
+    mouse_drop_action            swap           \
+    ;
+
+# Space settings:
+yabai -m config                                 \
+    layout                       bsp            \
+    top_padding                  15             \
+    bottom_padding               15             \
+    left_padding                 15             \
+    right_padding                15             \
+    window_gap                   15             \
+    auto_balance                 off            \
+    ;
+
+# Rules:
+yabai -m rule --add app="^Calculator$"               manage=off
+yabai -m rule --add app="^Digital Colou?r Meter$"    manage=off
+yabai -m rule --add app="^Finder$" title="Copying *" manage=off
+yabai -m rule --add app="^System Settings$"          manage=off
+
+yabai -m rule --add app="Alfred Preferences"              manage=off
+yabai -m rule --add app="Discord" title="Discord Updater" manage=off
+
+
+# The window borders are handled by JankyBorders:
+# https://github.com/FelixKratz/JankyBorders
+
+borders                       \
+    style=square              \
+    active_color=0xFFFFFFFF   \
+    inactive_color=0xFF242424 \
+    width=8.0                 \
+    hidpi=off                 \
+    order=above               \
+    &
